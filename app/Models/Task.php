@@ -13,7 +13,9 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-        "title"
+        "title",
+        "is_done",
+        "project_id"
     ];
 
     protected $casts = [
@@ -23,6 +25,11 @@ class Task extends Model
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, "creator_id");
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
     }
 
     protected static function booted(): void
